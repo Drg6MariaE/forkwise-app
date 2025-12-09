@@ -1,0 +1,74 @@
+// 1. Configuration
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 2. Models
+
+// User: The central entity
+model User {
+  id        String   @id @default(uuid()) // "Pro" tip: Use UUIDs, not integers, for security
+  email     String   @unique
+  password  String   // Will be hashed (encrypted)
+  fullName  String?
+
+  // Profile for AI Customization
+  goals           String[] // e.g. ["Lose Weight", "Gain Muscle"]
+  dietaryType     String?  // e.g. "Vegan", "Keto"
+  allergies       String[] // e.g. ["Peanuts", "Shellfish"]
+  budget          String?  // e.g. "Low", "Medium", "High"
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  savedRecipes      SavedRecipe[]
+  savedRestaurants  SavedRestaurant[]
+  dailyLogs         DailyLog[]
+}
+
+// SavedRecipe: Recipes the user favorites
+model SavedRecipe {
+  id          String   @id @default(uuid())
+  title       String
+  image       String?
+  calories    Int
+  protein     Int?
+  carbs       Int?
+  fats        Int?
+  sourceUrl   String?  // Link to instructions
+
+  // Relation to User
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}
+
+// SavedRestaurant: Restaurants the user favorites
+model SavedRestaurant {
+  id          String   @id @default(uuid())
+  name        String
+  address     String?
+  rating      Float?
+  priceLevel  String? // e.g. "$", "$$$"
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}
+
+// DailyLog: The "Calorie Tracer" core feature
+model DailyLog {
+  id            String   @id @default(uuid())
+  date          DateTime @default(now())
+  totalCalories Int      @default(0)
+
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
