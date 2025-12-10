@@ -1,12 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { colors } from './colors';
 
 export const goalsStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     padding: 24,
-    backgroundColor: colors.background,
   },
   header: {
     marginBottom: 32,
@@ -15,11 +13,9 @@ export const goalsStyles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 8,
-    color: colors.text,
   },
   subtitle: {
     fontSize: 16,
-    color: colors.textSecondary,
   },
   chipContainer: {
     flexDirection: 'row',
@@ -30,10 +26,10 @@ export const goalsStyles = StyleSheet.create({
   },
   chip: {
     margin: 4,
-    backgroundColor: colors.surface,
+ 
   },
   chipSelected: {
-    backgroundColor: colors.primary, // Highlight color when selected
+ // Highlight color when selected
   },
   button: {
     marginTop: 32,

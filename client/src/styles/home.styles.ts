@@ -1,12 +1,11 @@
 // client/src/styles/home.styles.ts
 import { StyleSheet } from 'react-native';
-import { colors } from './colors';
+
 
 export const homeStyles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: colors.light?.background || '#ffffff', 
+    padding: 20, 
   },
   header: {
     flexDirection: 'row',
@@ -18,10 +17,8 @@ export const homeStyles = StyleSheet.create({
   username: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: colors.light?.textPrimary || '#000000',
   },
   summaryCard: {
-    backgroundColor: colors.light?.primary || '#6200ee',
     borderRadius: 16,
     marginBottom: 24,
     elevation: 4,
@@ -50,7 +47,6 @@ export const homeStyles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 12,
     marginTop: 10,
-    color: colors.light?.textPrimary || '#000000',
   },
   actionGrid: {
     flexDirection: 'row',
@@ -70,7 +66,6 @@ export const homeStyles = StyleSheet.create({
   actionText: {
     marginTop: 8,
     fontWeight: '600',
-    color: colors.light?.textPrimary || '#000000',
   },
   goalCard: {
     marginBottom: 40,
