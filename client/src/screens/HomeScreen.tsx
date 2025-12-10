@@ -4,7 +4,7 @@ import { Text, Title, Card, Avatar } from 'react-native-paper';
 import { useAuthStore } from '../store/authStore';
 import { homeStyles as styles } from '../styles/home.styles';
 
-// 👇 IMPORT YOUR NEW HEADER
+
 import Header from '../components/header';
 
 export default function HomeScreen() {
@@ -12,19 +12,17 @@ export default function HomeScreen() {
 
   return (
     <View style={{ flex: 1 }}>
-      {/* 👇 Place your Custom Header at the very top */}
       <Header />
 
       <ScrollView style={styles.container}>
-        {/* Welcome Text */}
+    
         <View style={styles.header}>
            <View>
              <Text variant="bodyLarge">Welcome back,</Text>
-             <Title style={styles.username}>{user?.fullName || 'User'}</Title>
+             <Text style={styles.username}>{user?.fullName || 'User'}</Text>
            </View>
         </View>
 
-        {/* ... The rest of your summary cards ... */}
         
       </ScrollView>
     </View>

@@ -29,7 +29,7 @@ export const goalsStyles = StyleSheet.create({
  
   },
   chipSelected: {
- // Highlight color when selected
+ 
   },
   button: {
     marginTop: 32,

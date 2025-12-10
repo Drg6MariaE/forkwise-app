@@ -1,4 +1,3 @@
-// client/src/store/authStore.ts
 import { create } from 'zustand';
 import * as SecureStore from 'expo-secure-store';
 import api from '../api/axios';
@@ -7,19 +6,19 @@ interface User {
   id: string;
   email: string;
   fullName?: string;
-  goals?: string[]; // Added this to check if user has finished setup
+  goals?: string[]; 
 }
 
 interface AuthState {
   user: User | null;
   token: string | null;
   isLoading: boolean;
-  isFirstLaunch: boolean; // <--- NEW FLAG
+  isFirstLaunch: boolean; 
   login: (email: string, password: string) => Promise<void>;
   register: (fullName: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
-  checkAppInit: () => Promise<void>; // Renamed from loadUser
-  completeOnboarding: () => Promise<void>; // Call this after the 3 info pages
+  checkAppInit: () => Promise<void>; 
+  completeOnboarding: () => Promise<void>; 
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -57,10 +56,10 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   checkAppInit: async () => {
     try {
-      // 1. Check if it's the first launch ever
+      
       const hasLaunched = await SecureStore.getItemAsync('hasLaunched');
       
-      // 2. Check if user is logged in
+      
       const token = await SecureStore.getItemAsync('token');
       const userStr = await SecureStore.getItemAsync('user');
       
@@ -70,7 +69,7 @@ export const useAuthStore = create<AuthState>((set) => ({
       }
 
       set({ 
-        isFirstLaunch: hasLaunched === null, // If null, it IS first launch
+        isFirstLaunch: hasLaunched === null, 
         token: token || null,
         user: userData,
         isLoading: false 

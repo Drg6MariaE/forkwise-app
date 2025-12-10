@@ -1,12 +1,12 @@
 import React from 'react';
 import { Image, useColorScheme, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Replaces useRouter
+import { useNavigation } from '@react-navigation/native'; 
 
-// Imports
+
 import { headerStyles } from '../styles/header.styles';
 
 export default function Header() {
-  const navigation = useNavigation(); // Hook for navigation
+  const navigation = useNavigation();
   const colorScheme = useColorScheme();
 
 
@@ -15,7 +15,6 @@ export default function Header() {
       style={[
         headerStyles.head,
         {
-          // Dynamic Overrides based on Theme
 
         },
       ]}

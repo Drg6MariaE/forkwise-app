@@ -5,7 +5,7 @@ import { useAuthStore } from '../store/authStore';
 import { authStyles } from '../styles/auth.styles';
 
 export default function AuthScreen() {
-  const [isLogin, setIsLogin] = useState(true); // Toggle state
+  const [isLogin, setIsLogin] = useState(true); 
   const [loading, setLoading] = useState(false);
   
   // Form State
@@ -17,7 +17,7 @@ export default function AuthScreen() {
   const theme = useTheme();
 
   const handleSubmit = async () => {
-    // Validation
+   
     if (!email || !password) {
       Alert.alert('Missing Fields', 'Please fill in email and password.');
       return;
@@ -34,7 +34,7 @@ export default function AuthScreen() {
       } else {
         await register(fullName, email, password);
       }
-      // App.tsx will automatically switch screens upon success
+
     } catch (error: any) {
       const msg = error.response?.data?.message || 'Authentication failed.';
       Alert.alert('Error', msg);
@@ -57,7 +57,6 @@ export default function AuthScreen() {
         </View>
 
         <View style={authStyles.form}>
-          {/* Full Name - Only show if Registering */}
           {!isLogin && (
             <TextInput
               label="Full Name"

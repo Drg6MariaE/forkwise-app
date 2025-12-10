@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const step2Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF', // Clean White
+    backgroundColor: '#FFFFFF', 
     justifyContent: 'center',
     padding: 20,
   },
@@ -14,7 +14,7 @@ export const step2Styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 100,
-    backgroundColor: '#E0F7FA', // Light Cyan
+    backgroundColor: '#E0F7FA', 
   },
   title: {
     fontSize: 30,
