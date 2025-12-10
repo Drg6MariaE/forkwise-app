@@ -25,11 +25,8 @@ export default function OnboardingScreen() {
     <View style={styles.container}>
       <View style={styles.content}>
         {/* Placeholder for an illustration */}
-        <View style={styles.imagePlaceholder}>
-           <Title>IMG {step + 1}</Title>
-        </View>
 
-        <Title style={styles.title}>{pages[step].title}</Title>
+        <Text style={styles.title}>{pages[step].title}</Text>
         <Text style={styles.desc}>{pages[step].desc}</Text>
       </View>
       

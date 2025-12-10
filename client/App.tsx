@@ -2,25 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider as PaperProvider } from 'react-native-paper';
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { useAuthStore } from './src/store/authStore';
 
-// Screens
-import AuthScreen from './src/screens/AuthScreen'; // <--- NEW Unified Screen
+// 1. Import all your real screens
+import AuthScreen from './src/screens/AuthScreen';
 import OnboardingScreen from './src/screens/OnboardingScreen';
 import GoalsScreen from './src/screens/GoalsScreen';
 import CongratsScreen from './src/screens/CongratsScreen';
-
-// Placeholder for Home (We will build this next)
-const HomeScreen = () => {
-    const logout = useAuthStore(s => s.logout);
-    return (
-        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-            <Text>Main Dashboard</Text>
-            <Text onPress={logout} style={{marginTop:20, color:'blue'}}>Logout</Text>
-        </View>
-    );
-};
+import HomeScreen from './src/screens/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,14 +20,18 @@ export default function App() {
 
   useEffect(() => {
     checkAppInit();
-    setTimeout(() => {
+    // Keep splash visible for 2 seconds for branding
+    const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 2000); 
+    }, 2000);
+    return () => clearTimeout(timer);
   }, []);
 
+  // 2. Loading State (Splash)
   if (showSplash || isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
+        {/* You can replace this Text with your new Header Logo Image if you want! */}
         <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#6200ee' }}>ForkWise</Text> 
       </View>
     );
@@ -46,20 +40,21 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {/* We hide the default header because you built a custom one */}
+        <Stack.Navigator screenOptions={{ headerShown: false}}>
           
-          {/* 1. Onboarding (First time users only) */}
+          {/* A. First Launch Flow */}
           {isFirstLaunch && (
             <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           )}
 
-          {/* 2. Authentication (If not logged in) */}
+          {/* B. Authentication Flow */}
           {!token ? (
             <Stack.Screen name="Auth" component={AuthScreen} />
           ) : (
-            /* 3. Authenticated Flow */
+            /* C. Logged In Flow */
             <>
-              {/* If user logged in but has NO goals (New User) -> Show Setup */}
+              {/* If user logged in but has NO goals (New Account) -> Setup Flow */}
               {(!user?.goals || user.goals.length === 0) ? (
                  <>
                    <Stack.Screen name="Goals" component={GoalsScreen} />
@@ -67,7 +62,7 @@ export default function App() {
                  </>
               ) : null}
               
-              {/* Main App */}
+              {/* Main Dashboard */}
               <Stack.Screen name="Home" component={HomeScreen} />
             </>
           )}

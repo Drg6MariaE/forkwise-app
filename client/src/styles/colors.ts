@@ -1,11 +1,27 @@
-export const colors = {
-  primary: '#6200ee',       // Main Brand Color (Buttons, Headers)
-  background: '#ffffff',    // Main Page Background
-  surface: '#f5f5f5',       // Cards, Inputs background
-  text: '#000000',          // Main Text
-  textSecondary: '#666666', // Subtitles
-  accent: '#03dac4',        // Secondary actions / Highlights
-  error: '#B00020',         // Error messages
+const common = {
+  primary: '#6200ee',
+  secondary: '#03dac4',
+  error: '#B00020',
   white: '#ffffff',
-  success: '#4caf50',       // Success messages
+  black: '#000000',
+  gray: '#f5f5f5',
+};
+
+export const colors = {
+  light: {
+    ...common,
+    background: '#ffffff',
+    textPrimary: '#000000',
+    textSecondary: '#666666',
+    secondary: common.secondary, // Ensure this exists for your header
+  },
+  dark: {
+    ...common,
+    background: '#121212',
+    textPrimary: '#ffffff',
+    textSecondary: '#aaaaaa',
+    secondary: '#018786',
+  },
+  // Keep flat export for legacy support if needed
+  ...common 
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Alert, KeyboardAvoidingView, Platform, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Alert, KeyboardAvoidingView, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { TextInput, Button, Text, Title, useTheme } from 'react-native-paper';
 import { useAuthStore } from '../store/authStore';
 import { authStyles } from '../styles/auth.styles';
@@ -46,17 +46,17 @@ export default function AuthScreen() {
   return (
     <KeyboardAvoidingView 
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={authStyleslStyles.container}
+      style={authStyles.container}
     >
-      <ScrollView contentContainerStyle={authStyleslStyles.scrollContent}>
-        <View style={authStyleslStyles.header}>
-          <Text style={authStyleslStyles.title}>{isLogin ? 'Welcome Back' : 'Create Account'}</Text>
-          <Text style={authStyleslStyles.subtitle}>
+      <ScrollView contentContainerStyle={authStyles.scrollContent}>
+        <View style={authStyles.header}>
+          <Text style={authStyles.title}>{isLogin ? 'Welcome Back' : 'Create Account'}</Text>
+          <Text style={authStyles.subtitle}>
             {isLogin ? 'Enter your details to sign in' : 'Join ForkWise for free'}
           </Text>
         </View>
 
-        <View style={authStyleslStyles.form}>
+        <View style={authStyles.form}>
           {/* Full Name - Only show if Registering */}
           {!isLogin && (
             <TextInput
@@ -64,7 +64,7 @@ export default function AuthScreen() {
               value={fullName}
               onChangeText={setFullName}
               mode="outlined"
-              style={authStyleslStyles.input}
+              style={authStyles.input}
               left={<TextInput.Icon icon="account" />}
             />
           )}
@@ -76,7 +76,7 @@ export default function AuthScreen() {
             mode="outlined"
             keyboardType="email-address"
             autoCapitalize="none"
-            style={authStyleslStyles.input}
+            style={authStyles.input}
             left={<TextInput.Icon icon="email" />}
           />
 
@@ -95,14 +95,14 @@ export default function AuthScreen() {
             onPress={handleSubmit} 
             loading={loading}
             disabled={loading}
-            style={authStyleslStyles.button}
+            style={authStyles.button}
             contentStyle={{ paddingVertical: 8 }}
           >
             {isLogin ? 'Login' : 'Sign Up'}
           </Button>
         </View>
 
-        <View style={authStyleslStyles.footer}>
+        <View style={authStyles.footer}>
           <Text>{isLogin ? "Don't have an account? " : "Already have an account? "}</Text>
           <TouchableOpacity onPress={() => setIsLogin(!isLogin)}>
             <Text style={{ color: theme.colors.primary, fontWeight: 'bold' }}>
@@ -114,15 +114,3 @@ export default function AuthScreen() {
     </KeyboardAvoidingView>
   );
 }
-
-const authStyleslStyles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
-  scrollContent: { flexGrow: 1, justifyContent: 'center', padding: 24 },
-  header: { alignItems: 'center', marginBottom: 32 },
-  title: { fontSize: 32, fontWeight: 'bold', marginBottom: 8 },
-  subtitle: { fontSize: 16, color: '#666' },
-  form: { marginBottom: 24 },
-  input: { marginBottom: 16 },
-  button: { marginTop: 8, borderRadius: 8 },
-  footer: { flexDirection: 'row', justifyContent: 'center' },
-});
