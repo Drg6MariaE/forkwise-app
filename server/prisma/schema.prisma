@@ -1,3 +1,5 @@
+// server/prisma/schema.prisma
+
 // 1. Configuration
 generator client {
   provider = "prisma-client-js"
@@ -5,22 +7,23 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("forkwise_db") // <--- This line was missing!
 }
 
 // 2. Models
 
 // User: The central entity
 model User {
-  id        String   @id @default(uuid()) // "Pro" tip: Use UUIDs, not integers, for security
+  id        String   @id @default(uuid())
   email     String   @unique
-  password  String   // Will be hashed (encrypted)
+  password  String
   fullName  String?
 
   // Profile for AI Customization
-  goals           String[] // e.g. ["Lose Weight", "Gain Muscle"]
-  dietaryType     String?  // e.g. "Vegan", "Keto"
-  allergies       String[] // e.g. ["Peanuts", "Shellfish"]
-  budget          String?  // e.g. "Low", "Medium", "High"
+  goals       String[] // e.g. ["Lose Weight", "Gain Muscle"]
+  dietaryType String?  // e.g. "Vegan", "Keto"
+  allergies   String[] // e.g. ["Peanuts"]
+  budget      String?  // e.g. "Low", "Medium"
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -36,11 +39,11 @@ model SavedRecipe {
   id          String   @id @default(uuid())
   title       String
   image       String?
-  calories    Int
+  calories    Int?
   protein     Int?
   carbs       Int?
   fats        Int?
-  sourceUrl   String?  // Link to instructions
+  sourceUrl   String?
 
   // Relation to User
   userId      String
