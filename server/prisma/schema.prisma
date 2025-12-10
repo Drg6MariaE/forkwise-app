@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("forkwise_db") // <--- This line was missing!
 }
 
 // 2. Models
