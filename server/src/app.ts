@@ -4,8 +4,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import prisma from './db'; // <--- UPDATED: Import prisma instead of pool
+import prisma from './db'; 
 import authRoutes from './routes/auth';
+import userRoutes from './routes/user';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.json({ message: 'ForkWise API is ready!' });
